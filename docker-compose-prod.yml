@@ -1,0 +1,27 @@
+version: '3'
+services:
+  todo_api:
+    build: .
+    image: todo_api
+    restart: always
+    expose:
+        - 80
+    volumes:
+      - ./:/var/www/html/
+    networks:
+      - default
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PWD=${DB_PWD}
+      - DB_PORT=${DB_PORT}
+      - DB_CHARSET=${DB_CHARSET}
+      - VIRTUAL_HOST=todo.devguilherme.com.br
+      - LETSENCRYPT_HOST=todo.devguilherme.com.br
+      - LETSENCRYPT_EMAIL=guigo.reis90@gmail.com
+
+networks:
+    default:
+        external:
+            name: nginx-proxy

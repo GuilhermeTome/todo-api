@@ -1,0 +1,21 @@
+# folders
+/vendor/
+.vscode
+node_modules
+
+# files
+composer.lock
+yarn.lock
+
+#cache
+/cache/*
+!cache/.gitkeep
+
+#storage
+/storage/*
+!storage/.gitkeep
+
+#environment
+.env
+configurations.php
+package-lock.json

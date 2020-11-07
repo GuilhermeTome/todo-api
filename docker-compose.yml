@@ -1,0 +1,34 @@
+version: '3'
+services:
+  todo_api:
+    build: .
+    image: todo_api
+    restart: always
+    ports:
+      - '8091:80'
+    volumes:
+      - ./:/var/www/html/
+    networks:
+      - default
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PWD=${DB_PWD}
+      - DB_PORT=${DB_PORT}
+      - DB_CHARSET=${DB_CHARSET}
+  todo_api-postgres:
+    image: postgres
+    restart: always
+    ports:
+      - '${DB_PORT}:5432'
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PWD}
+    volumes:
+      - db_data:/var/lib/pgsql
+    networks:
+      - default
+volumes:
+  db_data:
